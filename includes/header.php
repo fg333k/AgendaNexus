@@ -29,13 +29,16 @@ $badge_class = 'badge-' . $sessao_perfil;
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= htmlspecialchars($titulo_pagina) ?> — AgendaNexus</title>
   <link rel="stylesheet" href="/assets/style.css">
+  <link rel="shortcut icon" href="../assets/images/Logo_tipo_AegndaNexus.ico" type="image/x-icon">
 </head>
 <body>
 <div class="app-layout">
 
   <aside class="sidebar">
   <div class="sidebar-brand">
-    <div class="brand-icon">📋</div>
+    <div class="brand-icon">
+      <img src="../assets/images/Logo_tipo_AegndaNexus.png" alt="">
+    </div>
     <span>AgendaNexus</span>
   </div>
 

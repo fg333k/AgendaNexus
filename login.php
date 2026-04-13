@@ -52,6 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login — AgendaNexus</title>
   <link rel="stylesheet" href="/assets/style.css">
+  <link rel="shortcut icon" href="assets/images/Logo_tipo_AegndaNexus.ico" type="image/x-icon">
   <style>
     body {
       background: var(--text);
@@ -104,12 +105,16 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 
     .login-brand .licon {
-      width: 56px; height: 56px;
+      width: 90px; height: 90px;
       background: var(--text);
       border-radius: 16px;
       display: flex; align-items: center; justify-content: center;
       font-size: 26px;
       margin: 0 auto 1rem;
+
+      img{
+        width: 60px;
+      }
     }
 
     .login-brand h1 {
@@ -166,7 +171,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
 <div class="login-box">
   <div class="login-brand">
-    <div class="licon">📋</div>
+    <div class="licon">
+      <img src="assets/images/Logo_tipo_AegndaNexus.png" alt="">
+    </div>
     <h1>AgendaNexus</h1>
     <p>Sistema de Agendamento Profissional</p>
   </div>

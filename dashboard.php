@@ -128,7 +128,7 @@ include "includes/header.php";
   </div>
   
   <?php if ($sessao_perfil === 'administrador'): ?>
-    <a href="/novo_agendamento.php" class="btn-primary">＋ Novo agendamento</a>
+    <a href="/novo_agendamento.php" class="btn-primary">+ Novo agendamento</a>
   <?php endif; ?>
 </div>
 

@@ -37,7 +37,7 @@ include "includes/header.php";
     <div class="section-title">Usuários do Sistema</div>
     <div class="section-sub"><?= $total ?> usuário(s) cadastrado(s)</div>
   </div>
-  <a href="/novo_usuario.php" class="btn-primary">＋ Novo usuário</a>
+  <a href="/novo_usuario.php" class="btn-primary">+ Novo usuário</a>
 </div>
 
 <div class="table-wrap">

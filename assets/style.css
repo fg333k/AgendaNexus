@@ -65,18 +65,23 @@ body {
 .sidebar-brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 5px;
   padding: 0 0.5rem 1.8rem;
   border-bottom: 1px solid rgba(255,255,255,0.08);
   margin-bottom: 1.5rem;
 }
 
 .sidebar-brand .brand-icon {
-  width: 36px; height: 36px;
+  width: 40px; height: 36px;
   background: var(--primary-mid);
   border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
   font-size: 17px;
+  padding:0px 10px;
+
+  img{
+    width: 20px;
+  }
 }
 
 .sidebar-brand span {
