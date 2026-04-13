@@ -165,8 +165,10 @@ git clone https://github.com/fg333k/AgendaNexus.git
 
 **2. Mova para a raiz do Apache**
 ```bash
-# Linux (Arch)
+# Linux 
 sudo cp -r AgendaNexus /srv/http/
+ou
+sudo cp -r AgendaNexus /home/usuario/www/
 
 # Windows (XAMPP)
 # Copie para C:\xampp\htdocs\AgendaNexus

@@ -1,9 +1,9 @@
 <?php
 
 $servidor = "127.0.0.1";
-$usuario  = "agendanexus"; 
+$usuario  = "agendaflex"; 
 $senha    = "12345";
-$banco    = "agendanexus"; 
+$banco    = "agendaflex"; 
 
 $conn = mysqli_connect($servidor, $usuario, $senha, $banco);
 
