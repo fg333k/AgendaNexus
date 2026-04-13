@@ -1,6 +1,6 @@
 <?php
 
-//  excluir_agendamento.php
+//  excluir_agendamento
 
 include "includes/auth.php";
 

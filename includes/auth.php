@@ -1,7 +1,6 @@
 <?php
 
-//  includes/auth.php — Verifica se o usuário está logado
-//  RECOMENDAÇÃO - Incluir no topo de toda página protegida
+//  includes/auth
 
 
 if (session_status() === PHP_SESSION_NONE) {

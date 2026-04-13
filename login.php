@@ -1,7 +1,6 @@
 <?php
 
-//  login.php
-
+//  login
 if (session_status() === PHP_SESSION_NONE) session_start();
 
 if (!empty($_SESSION['usuario_id'])) {
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login — AgendaFlex</title>
+  <title>Login — AgendaNexus</title>
   <link rel="stylesheet" href="/assets/style.css">
   <style>
     body {
@@ -168,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 <div class="login-box">
   <div class="login-brand">
     <div class="licon">📋</div>
-    <h1>AgendaFlex</h1>
+    <h1>AgendaNexus</h1>
     <p>Sistema de Agendamento Profissional</p>
   </div>
 

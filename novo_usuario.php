@@ -1,7 +1,6 @@
 <?php
 
-//  novo_usuario.php — Somente administrador
-
+//  novo_usuario 
 include "includes/auth.php";
 
 if ($sessao_perfil !== 'administrador') {
@@ -23,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     $especialidade = mysqli_real_escape_string($conn, $_POST['especialidade']);
     $registro_prof = mysqli_real_escape_string($conn, $_POST['registro_prof']);
     $senha         = $_POST['senha'];
-    $ativo         = isset($_POST['ativo']) ? 1 : 0;
+    
+    // MODIFICAÇÃO: Captura o valor do select (1 ou 0)
+    $ativo         = (int)$_POST['ativo'];
 
     if ($nome == '' || $email == '' || $senha == '') {
         $erro = "Nome, e-mail e senha são obrigatórios.";
@@ -132,15 +133,15 @@ include "includes/header.php";
     <div class="form-grid-2">
       <div class="form-group">
         <label>Senha *</label>
-        <input type="password" name="senha" placeholder="Mínimo 6 caracteres">
+        <input type="password" name="senha" placeholder="Mínimo 6 caracteres" required>
       </div>
 
-      <div class="form-group" style="display:flex;align-items:flex-end;padding-bottom:4px">
-        <label style="display:flex;align-items:center;gap:8px;text-transform:none;font-size:0.85rem;cursor:pointer">
-          <input type="checkbox" name="ativo" value="1"
-                 checked style="width:auto">
-          Usuário ativo
-        </label>
+      <div class="form-group">
+        <label>Status Inicial *</label>
+        <select name="ativo" required>
+          <option value="1" <?= ($_POST['ativo'] ?? '1') == '1' ? 'selected' : '' ?>>Ativo</option>
+          <option value="0" <?= ($_POST['ativo'] ?? '') == '0' ? 'selected' : '' ?>>Inativo</option>
+        </select>
       </div>
     </div>
 
@@ -154,9 +155,12 @@ include "includes/header.php";
 
 <script>
 function toggleProfFields(perfil) {
-  document.getElementById('prof-fields').style.display =
-    perfil === 'profissional' ? 'block' : 'none';
+  const fields = document.getElementById('prof-fields');
+  if (fields) {
+    fields.style.display = perfil === 'profissional' ? 'block' : 'none';
+  }
 }
+// Inicializa os campos baseado no perfil selecionado
 toggleProfFields(document.querySelector('[name=perfil]').value);
 </script>
 

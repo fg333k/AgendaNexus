@@ -1,10 +1,10 @@
 <?php
 
-//  novo_agendamento.php
-
+//  novo_agendamento
 include "includes/auth.php";
 
-if ($sessao_perfil === 'cliente') {
+
+if ($sessao_perfil !== 'administrador') {
     header("Location: /dashboard.php");
     exit;
 }
@@ -14,14 +14,14 @@ include "includes/conexao.php";
 $pagina_atual = 'agendamentos';
 $erro = "";
 
-// ── Listas para os selects ────────────────────────────────
-$sql_profs  = "SELECT id, nome, especialidade FROM usuarios WHERE perfil = 'profissional' AND ativo = 1 ORDER BY nome";
-$res_profs  = mysqli_query($conn, $sql_profs);
+// ── Listas para os selects 
+$sql_profs   = "SELECT id, nome, especialidade FROM usuarios WHERE perfil = 'profissional' AND ativo = 1 ORDER BY nome";
+$res_profs   = mysqli_query($conn, $sql_profs);
 
 $sql_clientes = "SELECT id, nome FROM usuarios WHERE perfil = 'cliente' AND ativo = 1 ORDER BY nome";
 $res_clientes = mysqli_query($conn, $sql_clientes);
 
-// ── Processar POST ────────────────────────────────────────
+// ── Processar POST 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $profissional_id = (int) $_POST['profissional_id'];
@@ -82,7 +82,6 @@ include "includes/header.php";
         <select name="profissional_id" required>
           <option value="0">Selecionar...</option>
           <?php
-          // Rebobina o resultado para reutilizar caso haja erro de validação
           mysqli_data_seek($res_profs, 0);
           while ($p = mysqli_fetch_assoc($res_profs)):
           ?>

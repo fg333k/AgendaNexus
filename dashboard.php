@@ -1,14 +1,12 @@
 <?php
-
-//  dashboard.php
-
+//  dashboard
 include "includes/auth.php";
 include "includes/conexao.php";
+$pagina_atual = 'dashboard';    // Define a página para o menu active
 
-$pagina_atual = 'dashboard';
 $hoje = date('Y-m-d');
 
-// ── Restrição por perfil (reutilizada em todas as queries) ─
+// ── Restrição por perfil (reutilizada em todas as queries) 
 $where_perfil_agend = "";
 
 if ($sessao_perfil === 'cliente') {
@@ -19,21 +17,21 @@ if ($sessao_perfil === 'profissional') {
     $where_perfil_agend = " AND profissional_id = $sessao_id";
 }
 
-// ── Total de agendamentos hoje (filtrado por perfil) ──────
-$sql       = "SELECT COUNT(*) AS total FROM agendamentos
+// ── Total de agendamentos hoje (filtrado por perfil) 
+$sql       = "SELECT COUNT(*) AS total FROM agendamentos 
               WHERE DATE(data_hora) = '$hoje' $where_perfil_agend";
 $resultado = mysqli_query($conn, $sql);
 $row       = mysqli_fetch_assoc($resultado);
 $total_hoje = $row['total'];
 
-// ── Total pendentes (filtrado por perfil) ─────────────────
-$sql       = "SELECT COUNT(*) AS total FROM agendamentos
+// ── Total pendentes (filtrado por perfil) 
+$sql       = "SELECT COUNT(*) AS total FROM agendamentos 
               WHERE status = 'pendente' $where_perfil_agend";
 $resultado = mysqli_query($conn, $sql);
 $row       = mysqli_fetch_assoc($resultado);
 $total_pendentes = $row['total'];
 
-// ── Total clientes e profissionais (somente admin) ────────
+// ── Total clientes e profissionais (somente admin) 
 $total_clientes      = 0;
 $total_profissionais = 0;
 
@@ -60,9 +58,9 @@ if ($sessao_perfil === 'profissional') {
     $where_tabela .= " AND a.profissional_id = $sessao_id";
 }
 
-$sql = "SELECT
-            a.id,
-            DATE_FORMAT(a.data_hora, '%d/%m/%Y') AS data,
+$sql = "SELECT 
+            a.id, 
+            DATE_FORMAT(a.data_hora, '%d/%m/%Y') AS data, 
             DATE_FORMAT(a.data_hora, '%H:%i')    AS hora,
             p.nome        AS profissional,
             p.especialidade,
@@ -88,7 +86,6 @@ mysqli_close($conn);
 include "includes/header.php";
 ?>
 
-<!-- Cards de estatística -->
 <div class="stats-grid">
   <div class="stat-card">
     <div class="stat-icon" style="background:var(--primary-light)">📅</div>
@@ -124,13 +121,13 @@ include "includes/header.php";
   </div>
 </div>
 
-<!-- Tabela -->
 <div class="section-header">
   <div>
     <div class="section-title">Próximos agendamentos</div>
     <div class="section-sub">A partir de hoje — <?= date('d/m/Y') ?></div>
   </div>
-  <?php if ($sessao_perfil !== 'cliente'): ?>
+  
+  <?php if ($sessao_perfil === 'administrador'): ?>
     <a href="/novo_agendamento.php" class="btn-primary">＋ Novo agendamento</a>
   <?php endif; ?>
 </div>
@@ -151,7 +148,7 @@ include "includes/header.php";
         <th>Serviço</th>
         <th>Sala</th>
         <th>Status</th>
-        <?php if ($sessao_perfil !== 'cliente'): ?>
+        <?php if ($sessao_perfil === 'administrador'): ?>
         <th style="text-align:right">Ações</th>
         <?php endif; ?>
       </tr>
@@ -195,16 +192,18 @@ include "includes/header.php";
             <span class="dot"></span> <?= $a['status'] ?>
           </span>
         </td>
-        <?php if ($sessao_perfil !== 'cliente'): ?>
+        
+        <?php if ($sessao_perfil === 'administrador'): ?>
         <td>
           <div class="td-actions">
             <a href="/editar_agendamento.php?id=<?= $a['id'] ?>" class="btn-icon" title="Editar">✎</a>
-            <a href="/excluir_agendamento.php?id=<?= $a['id'] ?>"
+            <a href="/excluir_agendamento.php?id=<?= $a['id'] ?>" 
                class="btn-icon danger" title="Excluir"
                onclick="return confirm('Excluir este agendamento?')">✕</a>
           </div>
         </td>
         <?php endif; ?>
+
       </tr>
       <?php endwhile; ?>
     </tbody>

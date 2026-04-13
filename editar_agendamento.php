@@ -1,6 +1,6 @@
 <?php
 
-//  editar_agendamento.php
+//  editar_agendamento
 
 include "includes/auth.php";
 
@@ -21,7 +21,7 @@ if ($id == 0) {
     exit;
 }
 
-// ── Busca o agendamento ───────────────────────────────────
+// ── Busca o agendamento 
 $sql       = "SELECT *, DATE_FORMAT(data_hora, '%Y-%m-%d') AS data, DATE_FORMAT(data_hora, '%H:%i') AS hora
               FROM agendamentos WHERE id = $id LIMIT 1";
 $resultado = mysqli_query($conn, $sql);
@@ -39,11 +39,11 @@ if ($sessao_perfil === 'profissional' && $agendamento['profissional_id'] != $ses
     exit;
 }
 
-// ── Listas para os selects ────────────────────────────────
+// ── Listas para os selects 
 $res_profs    = mysqli_query($conn, "SELECT id, nome, especialidade FROM usuarios WHERE perfil = 'profissional' AND ativo = 1 ORDER BY nome");
 $res_clientes = mysqli_query($conn, "SELECT id, nome FROM usuarios WHERE perfil = 'cliente' AND ativo = 1 ORDER BY nome");
 
-// ── Processar POST ────────────────────────────────────────
+// ── Processar POST 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     $profissional_id = (int) $_POST['profissional_id'];

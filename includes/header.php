@@ -1,5 +1,5 @@
 <?php
-// $pagina_atual deve ser definida antes de incluir este arquivo
+
 $pagina_atual = $pagina_atual ?? '';
 
 $titulos = [
@@ -12,7 +12,7 @@ $titulos = [
     'editar_usuario'     => 'Editar Usuário',
 ];
 
-$titulo_pagina = $titulos[$pagina_atual] ?? 'AgendaFlex';
+$titulo_pagina = $titulos[$pagina_atual] ?? 'AgendaNexus';
 
 $label_perfil = [
     'administrador' => 'Administrador',
@@ -27,17 +27,17 @@ $badge_class = 'badge-' . $sessao_perfil;
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= htmlspecialchars($titulo_pagina) ?> — AgendaFlex</title>
+  <title><?= htmlspecialchars($titulo_pagina) ?> — AgendaNexus</title>
   <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
 <div class="app-layout">
 
   <aside class="sidebar">
-    <div class="sidebar-brand">
-      <div class="brand-icon">📋</div>
-      <span>AgendaFlex</span>
-    </div>
+  <div class="sidebar-brand">
+    <div class="brand-icon">📋</div>
+    <span>AgendaNexus</span>
+  </div>
 
     <div class="sidebar-section">Principal</div>
 

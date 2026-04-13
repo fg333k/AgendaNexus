@@ -1,7 +1,6 @@
 <?php
 
-//  excluir_usuario.php — Somente administrador
-
+//  excluir_usuario 
 include "includes/auth.php";
 
 if ($sessao_perfil !== 'administrador') {

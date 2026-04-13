@@ -1,15 +1,14 @@
 <?php
 
-//  usuarios.php — Somente administrador
-
+//  usuarios 
 include "includes/auth.php";
+include "includes/conexao.php";
 
+// Proteção de perfil
 if ($sessao_perfil !== 'administrador') {
     header("Location: /dashboard.php");
     exit;
 }
-
-include "includes/conexao.php";
 
 $pagina_atual = 'usuarios';
 
@@ -71,28 +70,40 @@ include "includes/header.php";
             <div class="person-name"><?= htmlspecialchars($u['nome']) ?></div>
           </div>
         </td>
-        <td style="font-size:0.82rem"><?= htmlspecialchars($u['email']) ?></td>
-        <td style="font-size:0.82rem;color:var(--muted)"><?= htmlspecialchars($u['telefone'] ?? '—') ?></td>
+        
+        <td style="font-size:0.82rem">
+          <?= htmlspecialchars($u['email']) ?>
+        </td>
+        
+        <td style="font-size:0.82rem; color:var(--muted)">
+          <?= htmlspecialchars($u['telefone'] ?? '—') ?>
+        </td>
+        
         <td>
           <span class="badge-perfil badge-<?= $u['perfil'] ?>">
             <?= $u['perfil'] ?>
           </span>
         </td>
-        <td style="font-size:0.82rem;color:var(--muted)">
+        
+        <td style="font-size:0.82rem; color:var(--muted)">
           <?= htmlspecialchars($u['especialidade'] ?? '—') ?>
         </td>
+        
         <td>
           <span class="entity-tag <?= $u['ativo'] ? 'tag-ativo' : 'tag-inativo' ?>">
             <?= $u['ativo'] ? 'Ativo' : 'Inativo' ?>
           </span>
         </td>
+
         <td>
-          <div class="td-actions">
+          <div class="td-actions" style="justify-content: flex-end">
             <a href="/editar_usuario.php?id=<?= $u['id'] ?>" class="btn-icon" title="Editar">✎</a>
+            
             <?php if ($u['id'] != $sessao_id): ?>
-            <a href="/excluir_usuario.php?id=<?= $u['id'] ?>"
-               class="btn-icon danger" title="Excluir"
-               onclick="return confirm('Excluir o usuário <?= htmlspecialchars(addslashes($u['nome'])) ?>?')">✕</a>
+              <a href="/excluir_usuario.php?id=<?= $u['id'] ?>"
+                 class="btn-icon danger" 
+                 title="Excluir"
+                 onclick="return confirm('Excluir o usuário <?= htmlspecialchars(addslashes($u['nome'])) ?>?')">✕</a>
             <?php endif; ?>
           </div>
         </td>

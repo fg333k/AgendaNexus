@@ -1,20 +1,19 @@
 <?php
 
-//  agendamentos.php — Listagem com filtros
-
+// agendamentos Listagem
 include "includes/auth.php";
 include "includes/conexao.php";
 
 $pagina_atual = 'agendamentos';
 
-// ── Filtros via GET ───────────────────────────────────────
+// ── Filtros via GET 
 $filtro_data    = $_GET['data']    ?? '';
 $filtro_prof    = $_GET['prof']    ?? '';
 $filtro_status  = $_GET['status']  ?? '';
 $filtro_servico = $_GET['servico'] ?? '';
 $filtro_busca   = $_GET['busca']   ?? '';
 
-// ── Montagem WHERE dinamicamente ─────────────────────────────
+// ── Monta WHERE dinamicamente
 $where = "WHERE 1=1";
 
 if ($filtro_data != '') {
@@ -48,7 +47,7 @@ if ($sessao_perfil === 'profissional') {
     $where .= " AND a.profissional_id = $sessao_id";
 }
 
-// ── Consulta principal ────────────────────────────────────
+// ── Consulta principal 
 $sql = "SELECT
             a.id,
             DATE_FORMAT(a.data_hora, '%d/%m/%Y') AS data,
@@ -73,7 +72,7 @@ if (!$resultado) {
 
 $total = mysqli_num_rows($resultado);
 
-// ── Lista de profissionais para o filtro ──────────────────
+// ── Lista de profissionais para o filtro 
 $sql_profs     = "SELECT id, nome FROM usuarios WHERE perfil = 'profissional' AND ativo = 1 ORDER BY nome";
 $res_profs     = mysqli_query($conn, $sql_profs);
 
@@ -87,12 +86,12 @@ include "includes/header.php";
     <div class="section-title">Todos os Agendamentos</div>
     <div class="section-sub"><?= $total ?> registro(s) encontrado(s)</div>
   </div>
-  <?php if ($sessao_perfil !== 'cliente'): ?>
+  
+  <?php if ($sessao_perfil === 'administrador'): ?>
     <a href="/novo_agendamento.php" class="btn-primary">＋ Novo agendamento</a>
   <?php endif; ?>
 </div>
 
-<!-- Filtros -->
 <form method="GET" action="/agendamentos.php">
   <div class="filters-row">
 
@@ -142,7 +141,6 @@ include "includes/header.php";
   </div>
 </form>
 
-<!-- Tabela -->
 <div class="table-wrap">
   <?php if ($total == 0): ?>
     <div class="empty-state">
@@ -159,7 +157,7 @@ include "includes/header.php";
         <th>Serviço</th>
         <th>Sala</th>
         <th>Status</th>
-        <?php if ($sessao_perfil !== 'cliente'): ?>
+        <?php if ($sessao_perfil === 'administrador'): ?>
         <th style="text-align:right">Ações</th>
         <?php endif; ?>
       </tr>
@@ -199,7 +197,8 @@ include "includes/header.php";
             <span class="dot"></span> <?= $a['status'] ?>
           </span>
         </td>
-        <?php if ($sessao_perfil !== 'cliente'): ?>
+        
+        <?php if ($sessao_perfil === 'administrador'): ?>
         <td>
           <div class="td-actions">
             <a href="/editar_agendamento.php?id=<?= $a['id'] ?>" class="btn-icon" title="Editar">✎</a>
