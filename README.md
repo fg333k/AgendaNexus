@@ -212,7 +212,7 @@ http://localhost/AgendaNexus
 
 | Nome | Perfil |
 |---|---|
-| Emilio Eduardo Maciel | [@GitHub](https://github.com/) |
+| Emilio Eduardo Maciel | [@emilio-eduardo-tech](https://github.com/emilio-eduardo-tech) |
 | Felipe de Almeida Pereira | [@fg333k](https://github.com/fg333k) |
 
 ---
